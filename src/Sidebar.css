@@ -49,9 +49,10 @@
         color: rgb(195, 195, 195);
 }
 
-.sidebarchat{
+.sidebar_chats{
         
-        display: flex;
+        flex: 1;
+        
     
     background-color: rgb(255, 255, 255);
     /* overflow: scroll; */
