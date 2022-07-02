@@ -18,5 +18,6 @@
     display: none;
 }
 .bot-gif{
-
+    background-color: transparent;
+    border: none;
 }
