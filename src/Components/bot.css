@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+.bot-main{
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    /* height: 4vw; */
+}
+.bot-idea{
+    background-color: white;
+    min-height: 10vh;
+    padding: 5%;
+    font-size: larger;
+    text-align: center;
+    border-radius: 20% 20% 0 20%;
+    font-family: 'VT323', monospace;
+}
+.hidden{
+    display: none;
+}
+.bot-gif{
+
+}
