@@ -46,6 +46,7 @@
     
 }
 .sidebar_searchContainer > .MuiSvgIcon-root{
+    padding: 5px;
         color: rgb(195, 195, 195);
 }
 
@@ -55,5 +56,5 @@
         
     
     background-color: rgb(255, 255, 255);
-    /* overflow: scroll; */
+      overflow: scroll;  
 } 
