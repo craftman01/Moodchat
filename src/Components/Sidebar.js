@@ -9,6 +9,7 @@ import './SidebarChat';
 import SidebarChat from './SidebarChat';
 
 function Sidebar() {
+  
   return (
     <div className='sidebar'>
        
@@ -30,13 +31,14 @@ function Sidebar() {
         </div>
 
         <div className="sidebar_chats">
+            <SidebarChat addNewChat/>
             <SidebarChat/>
             <SidebarChat/>
             <SidebarChat/>
             <SidebarChat/>
             <SidebarChat/>
-            <SidebarChat/>
-              
+            
+          
         </div>
 
       

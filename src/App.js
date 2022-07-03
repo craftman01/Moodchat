@@ -2,6 +2,7 @@
 import './App.css';
 import Bot from './Components/Bot';
 import Sidebar  from "./Components/Sidebar";
+import Chat from './Chat';
 
 function App() {
   return (
@@ -10,10 +11,10 @@ function App() {
 
       <div className='app_body'>
     < Sidebar />
-      {/*chat */}
+      <Chat/>
       </div>
       
-    <Bot/>
+    {/* <Bot/> */}
 
     </div>
   );
