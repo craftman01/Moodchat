@@ -1,23 +1,45 @@
 import React, { Component } from 'react'
-import botGit from '../resource/bot/robot-idle.gif'
+import botGif from '../resource/bot/robot-idle.gif'
 import './bot.css'
 
 export class Bot extends Component {
 
     constructor(self) {
         super()
+        this.state = {
+            bot_active: false
+        }
+        this.botActivate = this.botActivate.bind(this);
+
+    }
+
+    componentDidMount() {
+
+    }
+
+    botActivate(params) {
+        this.setState({
+            bot_active: !this.state.bot_active
+        })
+        if(this.state.bot_active){
+            document.getElementById('bot-idea').style.display = 'none'
+        }
+        else{
+            document.getElementById('bot-idea').style.display = 'block'
+
+        }
     }
     render() {
         return (
             <div className='bot-main'>
-                <div className='bot-idea'>
+                <div className='bot-idea' id='bot-idea'>
                     Hi,
                     <br />
-                    asdfiu hasd fromasdfu hsadf
+                    Im mood recommender bot
 
                 </div>
-                <button className='bot-gif'>
-                    <img src={botGit} height='200' alt="error bot" />
+                <button onClick={this.botActivate} className='bot-gif {}' id='bot-gif'>
+                    <img src={botGif} height='200' alt="error bot" />
                 </button>
             </div>
         )
