@@ -13,7 +13,7 @@ function App() {
       {/*chat */}
       </div>
       
-    <Bot/>
+    {/* <Bot/> */}
 
     </div>
   );
