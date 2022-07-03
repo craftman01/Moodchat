@@ -9,10 +9,10 @@ import { SearchOutlined } from '@mui/icons-material';
 import "./Chat.css"
 
 function Chat() {
-const [seed, setSeed] = useState("");
+const [seed, setSeed] = useState(""); 
 
 useEffect(() => {
-  setSeed(math.floor(Math.random() * 5000));
+  setSeed(Math.floor(Math.random() * 5000));
 
 }, []);
 
