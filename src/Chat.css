@@ -69,3 +69,30 @@
     margin-left: 10px;
     font-size: xx-small;
  }
+
+ .chat_footer{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 62px;
+   border-top: 1px solid gray;
+
+ }
+
+ .chat_footer > form{
+    flex: 1 ;
+    display: flex;
+    /* background-color: white; */
+ }
+
+ .chat_footer > form > input{
+   flex: 1 ;
+   display: flex;
+   padding: 10px;
+   border: none;
+    border-radius: 30px;
+}
+.chat_footer > form > button{
+ display: none;
+}
+ 

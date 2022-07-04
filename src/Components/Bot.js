@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import botGif from '../resource/bot/AW3884646_00.gif'
+import botGif from '../resource/bot/Oro.png'
 import './bot.css'
 
 export class Bot extends Component {
@@ -39,7 +39,7 @@ export class Bot extends Component {
 
                 </div>
                 <button onClick={this.botActivate} className='bot-gif {}' id='bot-gif'>
-                    <img src={botGif} height='200' alt="error bot" />
+                    <img src={botGif} height='300' alt="error bot" />
                 </button>
             </div>
         )

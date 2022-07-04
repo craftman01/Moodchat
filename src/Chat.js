@@ -3,7 +3,8 @@ import React,{ useEffect, useState } from 'react';
 import {Avatar, IconButton} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
- 
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import MicIcon from '@mui/icons-material/Mic';
 import { SearchOutlined } from '@mui/icons-material';
 
 import "./Chat.css"
@@ -43,7 +44,15 @@ useEffect(() => {
       </p>
       </div>
       <div className='chat_footer'>
-
+        
+      <IconButton><EmojiEmotionsIcon/></IconButton>
+      <form>
+        <input placeholder='Type a Message' type="text" />
+        <button type='submit'> Send a message </button>
+        </form>
+        <IconButton><MicIcon/></IconButton>
+        
+     
       </div>
 
     </div>
