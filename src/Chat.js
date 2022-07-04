@@ -35,7 +35,7 @@ useEffect(() => {
       </div>
       <div className='chat_body'>
       
-      <p className={`chat_message  ${false && "chat_reciver"}`}>
+      <p className={`chat_message  ${true && "chat_reciver"}`}>
       <span className="chat_name"> suraj</span>
         hay hloo
       <span className="chat_timestamp">5:00</span>

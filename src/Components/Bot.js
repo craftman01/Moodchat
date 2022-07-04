@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import botGif from '../resource/bot/robot-idle.gif'
+import botGif from '../resource/bot/AW3884646_00.gif'
 import './bot.css'
 
 export class Bot extends Component {
