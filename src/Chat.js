@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from 'react';
  
-import {Avatar, IconButton} from "@mui/material";
+import {Avatar, IconButton,  } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
@@ -10,12 +10,24 @@ import { SearchOutlined } from '@mui/icons-material';
 import "./Chat.css"
 
 function Chat() {
+
+  const [input, setInput] = useState("");
+  
+
 const [seed, setSeed] = useState(""); 
 
 useEffect(() => {
   setSeed(Math.floor(Math.random() * 5000));
 
 }, []);
+
+const sendMessage = (e) => {
+
+  e.preventDefault();
+  console.log('you typed >>> ', input);
+
+  setInput("");
+}
 
   return (
     <div className='chat'>
@@ -47,8 +59,8 @@ useEffect(() => {
         
       <IconButton><EmojiEmotionsIcon/></IconButton>
       <form>
-        <input placeholder='Type a Message' type="text" />
-        <button type='submit'> Send a message </button>
+        <input value={input} onChange={e => setInput(e.target.value)} placeholder='Type a Message' type="text" />
+        <button onClick={sendMessage} type='submit'> Send a message </button>
         </form>
         <IconButton><MicIcon/></IconButton>
         
