@@ -1,22 +1,20 @@
-
-import firebase from './firebase';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCkTvtD1K-Fx5XkY_6hxAG_-lgDpvFfG_U",
-    authDomain: "chats-3d792.firebaseapp.com",
-    projectId: "chats-3d792",
-    storageBucket: "chats-3d792.appspot.com",
-    messagingSenderId: "932402835372",
-    appId: "1:932402835372:web:e6ef81c8da755aa59f9409",
-    measurementId: "G-6L3SSX606H"
-  };
- 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
+  apiKey: "AIzaSyB8j9uuypLXSTtdQ2N0qA57hpn6grZ2FDA",
+  authDomain: "chatbot-baaed.firebaseapp.com",
+  databaseURL: "https://chatbot-baaed.firebaseio.com",
+  projectId: "chatbot-baaed",
+  storageBucket: "chatbot-baaed.appspot.com",
+  messagingSenderId: "64609322060",
+  appId: "1:64609322060:web:6f6d1776301fa6b42d60e9"
+};
 
-export { auth, provider };
-export default db;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// export { auth, provider };
+export {db,app};
 
 
