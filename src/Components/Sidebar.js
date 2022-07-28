@@ -9,9 +9,12 @@ import './SidebarChat';
 import SidebarChat from './SidebarChat';
 import { doc, onSnapshot } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
+import { getAuth, signOut } from "firebase/auth";
+
+const auth = getAuth();
 
 const getuser = () => {
-    
+
   let user = localStorage.getItem('user')
   if (!user) {
     user = uuidv4();
@@ -25,6 +28,14 @@ const getroom = () => {
     rommId = uuidv4();
   }
   return rommId
+}
+function signOutFunc(){
+  signOut(auth).then(() => {
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
+  
 }
 function Sidebar() {
   const [rooms, setRooms] = useState({});
@@ -51,7 +62,9 @@ function Sidebar() {
     <div className='sidebar'>
 
       <div className="sidebar_header">
-        <Avatar />
+        <button onClick={signOutFunc}>
+          <Avatar />
+        </button>
         <div className="sidebar_headerRight">
 
           <IconButton><ChatIcon /></IconButton>
