@@ -10,25 +10,10 @@ import SidebarChat from './SidebarChat';
 import { doc, onSnapshot } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth, signOut } from "firebase/auth";
-import styled from 'styled-components';
+
 const auth = getAuth();
 
-const getuser = () => {
 
-  let user = localStorage.getItem('user')
-  if (!user) {
-    user = uuidv4();
-  }
-  return user
-}
-const getroom = () => {
-
-  let rommId = localStorage.getItem('room_id')
-  if (!rommId) {
-    rommId = uuidv4();
-  }
-  return rommId
-}
 function signOutFunc() {
   signOut(auth).then(() => {
     // Sign-out successful.
@@ -38,27 +23,15 @@ function signOutFunc() {
 
 }
 function Sidebar() {
+
   const [rooms, setRooms] = useState({});
-  const [user, setUser] = useState(getuser);
-  const [rommId, setRoomId] = useState(getroom);
+  const [user, setUser] = useState({});
+
   const avaButton = {
     color: 'palevioletred',
     height: '7vh',
     backgroundColor: 'transparent',
     borderRadius: '80%'}
-
-useEffect(() => {
-
-  const unsub = onSnapshot(doc(db, "user", user), (doc) => {
-    console.log(db, app)
-    console.log("Current data: ", doc.data());
-  });
-  console.log(user)
-  console.log(rommId)
-}, [])
-
-
-
 
 return (
   <div className='sidebar'>
