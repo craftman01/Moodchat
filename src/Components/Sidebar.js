@@ -10,7 +10,7 @@ import SidebarChat from './SidebarChat';
 import { doc, onSnapshot } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth, signOut } from "firebase/auth";
-
+import styled from 'styled-components';
 const auth = getAuth();
 
 const getuser = () => {
@@ -29,67 +29,69 @@ const getroom = () => {
   }
   return rommId
 }
-function signOutFunc(){
+function signOutFunc() {
   signOut(auth).then(() => {
     // Sign-out successful.
   }).catch((error) => {
     // An error happened.
   });
-  
+
 }
 function Sidebar() {
   const [rooms, setRooms] = useState({});
   const [user, setUser] = useState(getuser);
   const [rommId, setRoomId] = useState(getroom);
-  // useEffect(()=>{
+  const avaButton = {
+    color: 'palevioletred',
+    height: '7vh',
+    backgroundColor: 'transparent',
+    borderRadius: '80%'}
 
-  // },[user])
+useEffect(() => {
 
-  useEffect(() => {
-
-    const unsub = onSnapshot(doc(db, "user", user), (doc) => {
-      console.log(db, app)
-      console.log("Current data: ", doc.data());
-    });
-    console.log(user)
-    console.log(rommId)
-  }, [])
+  const unsub = onSnapshot(doc(db, "user", user), (doc) => {
+    console.log(db, app)
+    console.log("Current data: ", doc.data());
+  });
+  console.log(user)
+  console.log(rommId)
+}, [])
 
 
 
 
-  return (
-    <div className='sidebar'>
+return (
+  <div className='sidebar'>
 
-      <div className="sidebar_header">
-        <button onClick={signOutFunc}>
-          <Avatar />
-        </button>
-        <div className="sidebar_headerRight">
+    <div className="sidebar_header">
+      <button style={avaButton} onClick={signOutFunc}>
+        <Avatar />
+      </button>
+      <div className="sidebar_headerRight">
 
-          <IconButton><ChatIcon /></IconButton>
-          <IconButton><MoreVertIcon /></IconButton>
-
-        </div>
-
-      </div>
-      <div className="sidebar_search">
-        <div className="sidebar_searchContainer">
-          <SearchOutlined />
-          <input placeholder="Search" type="text" />
-        </div>
-      </div>
-
-      <div className="sidebar_chats">
-        <SidebarChat addNewChat />
-        <SidebarChat />
-
+        <IconButton><ChatIcon /></IconButton>
+        <IconButton><MoreVertIcon /></IconButton>
 
       </div>
+
+    </div>
+    <div className="sidebar_search">
+      <div className="sidebar_searchContainer">
+        <SearchOutlined />
+        <input placeholder="Search" type="text" />
+      </div>
+    </div>
+
+    <div className="sidebar_chats">
+      <SidebarChat addNewChat />
+      <SidebarChat />
 
 
     </div>
-  )
+
+
+  </div>
+)
 }
 
 export default Sidebar
