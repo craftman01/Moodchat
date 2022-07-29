@@ -9,8 +9,7 @@ import { SearchOutlined } from '@mui/icons-material';
 
 import "./Chat.css"
 import { db } from './firebase';
-import { arrayUnion, doc, onSnapshot, serverTimestamp, setDoc, Timestamp, updateDoc } from "firebase/firestore";
-import { FirebaseError } from 'firebase/app';
+import { arrayUnion, doc, onSnapshot, setDoc, Timestamp, updateDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 
 class Chat extends React.Component {
