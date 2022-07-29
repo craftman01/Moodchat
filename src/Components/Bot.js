@@ -10,9 +10,7 @@ export class Bot extends Component {
             bot_active: false
         }
         this.botActivate = this.botActivate.bind(this);
-
     }
-
     componentDidMount() {
 
     }
