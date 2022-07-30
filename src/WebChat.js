@@ -62,11 +62,10 @@ export default class WebChat extends Component {
 
   }
   handleGroupChange(name){
+    // console.log("change grp name")
     this.setState(
       {groupName:name}
     )
-    console.log(this.state)
-    this.render()
   }
   render() {
 

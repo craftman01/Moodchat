@@ -15,11 +15,13 @@ import { getAuth } from 'firebase/auth';
 class Chat extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
+    // console.log(props)
+    let groupName = props.groupName
+    if (groupName === '') { groupName = 'Welcome' }
     this.state = {
-      msgs: ['asdf'],
+      msgs: [''],
       input: '',
-      groupName: props.groupName,
+      groupName: groupName,
       unsub: null
     }
     this.sendMessage = this.sendMessage.bind(this)
@@ -27,16 +29,22 @@ class Chat extends React.Component {
 
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.groupName !== prevState.groupName) {
-      this.state.unsub()
+    // console.log("[-]","Prop",this.props, prevProps, "State",this.state, prevState)
+    if (prevProps.groupName !== this.props.groupName) {
+
+      if (this.state.unsub != null) {
+        this.state.unsub()
+      }
       this.setState(
         {
           groupName: this.props.groupName,
-          unsub: this.listenForChanges()
+          unsub: this.listenForChanges(),
         }
       )
     }
+    // console.log("[+]","Prop",this.props, prevProps, "State",this.state, prevState)
   }
+
   async componentDidMount() {
 
     const unsub = this.listenForChanges()
@@ -44,8 +52,9 @@ class Chat extends React.Component {
 
   }
   listenForChanges() {
+
     return onSnapshot(
-      doc(db, "groups", this.state.groupName),
+      doc(db, "groups", this.props.groupName),
       (doc) => {
         let roomData = doc.data();
         let messages = [];
@@ -133,6 +142,7 @@ class Chat extends React.Component {
     }
   }
 
+
   render() {
     return (
       <div className='chat'>
@@ -151,7 +161,7 @@ class Chat extends React.Component {
             <IconButton><MoreVertIcon /></IconButton>
           </div>
         </div>
-        <div className='chat_body'>
+        <div className='chat_body' id='chat_body'>
           {this.state.msgs}
         </div>
         <div className='chat_footer'>
