@@ -5,7 +5,7 @@ import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db, app } from "../firebase"
 import { v4 as uuidv4 } from 'uuid';
 
-function SidebarChat({ id, name, addNewChat }) {
+function SidebarChat({ id, name,lastChat,addNewChat }) {
 
   const [seed, setSeed] = useState("");
 
@@ -14,18 +14,18 @@ function SidebarChat({ id, name, addNewChat }) {
   }, []);
 
   const createChat = async () => {
-    const ref = doc(db, "rooms");
     const roomName = prompt("Pleas enter name for chat");
     if (roomName) {
       console.log(roomName)      
     }
+    const ref = doc(db, "rooms",roomName);
   };
   return !addNewChat ? (
     <div className="sidebarChat">
       <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
       <div className='sidebarChat_info'>
         <h2>{name}</h2>
-        <p>Last message...</p>
+        <p>{lastChat}</p>
       </div>
 
 

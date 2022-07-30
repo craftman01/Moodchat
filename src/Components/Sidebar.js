@@ -22,10 +22,17 @@ function signOutFunc() {
   });
 
 }
-function Sidebar() {
-
-  const [rooms, setRooms] = useState({});
-  const [user, setUser] = useState({});
+function Sidebar(props) {
+  // const groupChats   <SidebarChat />
+  // groups.forEach(group=>{
+    // console.log(props)
+  // })
+  let groups =[]
+  console.log(props)
+  props.groups.forEach(group=>{
+    let messages = group[1].messages;
+     groups.push(<SidebarChat name={group[0]} lastChat={messages[messages.length-1].msg}/>)
+  })
 
   const avaButton = {
     color: 'palevioletred',
@@ -56,13 +63,9 @@ return (
     </div>
 
     <div className="sidebar_chats">
-      <SidebarChat addNewChat />
-      <SidebarChat />
-
-
+      <SidebarChat addNewChat />      
+      {groups}
     </div>
-
-
   </div>
 )
 }

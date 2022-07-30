@@ -2,6 +2,9 @@ import Bot from './Components/Bot';
 import Sidebar from "./Components/Sidebar";
 import Chat from './Chat';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './firebase';
+import React, { Component } from 'react'
 
 export function googleAuth() {
   const provider = new GoogleAuthProvider();
@@ -29,15 +32,47 @@ export function googleAuth() {
     });
 }
 
-export function WebChat(props) {
-  return <div>
-    <div className='app_bg'></div>
-    <div className="app">
-      <div className='app_body'>
-        <Sidebar />
-        <Chat />
+export default class WebChat extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      groups: [],
+      groupName: 'Vaazha'
+    }
+  }
+  
+  async componentDidMount() {
+    let groupName = []
+
+    const groups = await getDocs(collection(db, "groups"))
+
+    groups.forEach(group => {
+      groupName.push([group.id,group.data()])
+    })
+    this.setState({
+      groups: groupName,
+      groupName: groupName[0][0]
+    })
+    localStorage.setItem('activeGroup',groupName[0][0])
+    // this.state.groups = groupName
+    // this.state.groupName = groupName[0]
+    // console.log(this.state)
+
+  }
+  render() {
+
+    return <div>
+      <div className='app_bg'></div>
+      <div className="app">
+        <div className='app_body'>
+          <Sidebar groups={this.state.groups} />
+          <Chat groupName={this.state.groupName} />
+        </div>
+        <Bot />
       </div>
-      <Bot />
-    </div>
-  </div>;
+    </div>;
+
+  }
 }
+

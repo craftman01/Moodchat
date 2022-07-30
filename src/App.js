@@ -1,7 +1,7 @@
 
 import './App.css';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { WebChat, googleAuth } from './WebChat';
+import WebChat, { googleAuth } from './WebChat';
 import React from 'react';
 
 const auth = getAuth();

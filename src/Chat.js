@@ -15,10 +15,12 @@ import { getAuth } from 'firebase/auth';
 class Chat extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
+
     this.state = {
       msgs: ['asdf'],
       input: '',
-      roomId: ''
+      groupName: props.groupName
     }
     this.sendMessage = this.sendMessage.bind(this)
     this.updateOrCreateDoc = this.updateOrCreateDoc.bind(this)
@@ -27,7 +29,7 @@ class Chat extends React.Component {
   async componentDidMount() {
 
     const unsub = onSnapshot(
-      doc(db, "groups", "Vaazha"),
+      doc(db, "groups", this.state.groupName),
       (doc) => {
         let roomData = doc.data()
         let messages = []
@@ -64,7 +66,7 @@ class Chat extends React.Component {
           console.log("No grp found making")
           if (err instanceof TypeError) {
             console.log(roomData)
-            this.updateOrCreateDoc("Vaazha");
+            this.updateOrCreateDoc(this.state.groupName);
           }
           else {
             console.log(err)
@@ -98,7 +100,7 @@ class Chat extends React.Component {
     })
     if (this.state.input !== '') {
 
-      await updateDoc(doc(db, "groups", "Vaazha"),
+      await updateDoc(doc(db, "groups", this.state.groupName),
         {
           messages: arrayUnion(
             {
