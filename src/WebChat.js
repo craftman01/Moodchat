@@ -17,7 +17,7 @@ export function googleAuth() {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      console.log(user);
+      // console.log(user);
       // ...
     }).catch((error) => {
       // Handle Errors here.
@@ -27,7 +27,7 @@ export function googleAuth() {
       const email = error.customData.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(errorCode, errorMessage, email);
+      // console.log(errorCode, errorMessage, email);
       // ...
     });
 }
@@ -42,11 +42,23 @@ export default class WebChat extends Component {
     }
     this.handleGroupChange = this.handleGroupChange.bind(this)
   }
-  
+  // async componentDidUpdate(){
+    
+  //   let groupName = []
+
+  //   const groups = await this.updateGroups()
+  //   groups.forEach(group => {
+  //     groupName.push([group.id,group.data()])
+  //   })
+  //   this.setState({
+  //     groups: groupName
+  //   })
+  // }
   async componentDidMount() {
+    
     let groupName = []
 
-    const groups = await getDocs(collection(db, "groups"))
+    const groups = await this.updateGroups()
 
     groups.forEach(group => {
       groupName.push([group.id,group.data()])
@@ -55,17 +67,21 @@ export default class WebChat extends Component {
       groups: groupName,
       groupName: groupName[0][0]
     })
-    localStorage.setItem('activeGroup',groupName[0][0])
+    // localStorage.setItem('activeGroup',groupName[0][0])
     // this.state.groups = groupName
     // this.state.groupName = groupName[0]
     // console.log(this.state)
 
   }
+  async updateGroups() {
+    return await getDocs(collection(db, "groups"));
+  }
+
   handleGroupChange(name){
     this.setState(
       {groupName:name}
     )
-    console.log(this.state)
+    // console.log(this.state)
     this.render()
   }
   render() {

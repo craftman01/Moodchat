@@ -16,10 +16,13 @@ class Chat extends React.Component {
   constructor(props) {
     super(props);
     console.log(props)
+    let groupName = props.groupName
+    if (groupName === '')
+    groupName= 'Welcome'
     this.state = {
       msgs: ['asdf'],
       input: '',
-      groupName: props.groupName,
+      groupName: groupName,
       unsub: null
     }
     this.sendMessage = this.sendMessage.bind(this)
@@ -27,14 +30,21 @@ class Chat extends React.Component {
 
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.groupName !== prevState.groupName) {
-      this.state.unsub()
+    if (prevProps.groupName !== this.props.groupName) {
+      console.log('[-]')
+      if (this.state.unsub != null){
+        this.state.unsub()
+      }
       this.setState(
-        {
-          groupName: this.props.groupName,
+        { groupName: this.props.groupName ,
           unsub: this.listenForChanges()
+        
         }
       )
+      console.log(this.state)
+      this.render()
+      // this.state.unsub()
+      // this.listenForChanges()
     }
   }
   async componentDidMount() {
