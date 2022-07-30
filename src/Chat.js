@@ -16,23 +16,39 @@ class Chat extends React.Component {
   constructor(props) {
     super(props);
     console.log(props)
-
     this.state = {
       msgs: ['asdf'],
       input: '',
-      groupName: props.groupName
+      groupName: props.groupName,
+      unsub: null
     }
     this.sendMessage = this.sendMessage.bind(this)
     this.updateOrCreateDoc = this.updateOrCreateDoc.bind(this)
-  }
 
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.groupName !== prevState.groupName) {
+      this.state.unsub()
+      this.setState(
+        {
+          groupName: this.props.groupName,
+          unsub: this.listenForChanges()
+        }
+      )
+    }
+  }
   async componentDidMount() {
 
-    const unsub = onSnapshot(
+    const unsub = this.listenForChanges()
+    this.setState({ unsub: unsub })
+
+  }
+  listenForChanges() {
+    return onSnapshot(
       doc(db, "groups", this.state.groupName),
       (doc) => {
-        let roomData = doc.data()
-        let messages = []
+        let roomData = doc.data();
+        let messages = [];
         const auth = getAuth();
         try {
 
@@ -40,42 +56,42 @@ class Chat extends React.Component {
             message => {
               if (message.uid === auth.currentUser.uid) {
                 messages.push(
-                  <p className={`chat_message  ${true && "chat_reciver"}`}>
+                  <p key={message.time} className={`chat_message  ${true && "chat_reciver"}`}>
                     <span className="chat_name"> {message.sender}</span>
                     {message.msg}
                     <span className="chat_timestamp">{message.time.toDate().toString()}</span>
                   </p>
-                )
+                );
               }
               else {
                 messages.push(
-                  <p className={`chat_message  ${false && "chat_reciver"}`}>
+                  <p key={message.time} className={`chat_message  ${false && "chat_reciver"}`}>
                     <span className="chat_name"> {message.sender}</span>
                     {message.msg}
                     <span className="chat_timestamp">{message.time.toDate().toString()}</span>
                   </p>
-                )
+                );
               }
               this.setState({
                 msgs: messages
-              })
+              });
             }
-          )
+          );
         }
         catch (err) {
-          console.log("No grp found making")
+          console.log("No grp found making");
           if (err instanceof TypeError) {
-            console.log(roomData)
+            console.log(roomData);
             this.updateOrCreateDoc(this.state.groupName);
           }
           else {
-            console.log(err)
+            console.log(err);
           }
         }
       }
-    )
-
+    );
   }
+
   updateOrCreateDoc(grpName) {
     console.log("Grp name ", grpName)
     let docRef = doc(db, "groups", grpName)
@@ -110,6 +126,7 @@ class Chat extends React.Component {
               time: Timestamp.now()
             })
         })
+      console.log("Message: ", this.state.input)
 
 
 
@@ -124,8 +141,8 @@ class Chat extends React.Component {
         <div className='chat_header'>
           <Avatar src={`https://avatars.dicebear.com/api/human/asd.svg`} />
           <div className="chat_headerinfo">
-            <h3>Room Name</h3>
-            <p>last sceen at ...</p>
+            <h3>{this.state.groupName}</h3>
+            <p>online</p>
           </div>
 
           <div className="chat_headerRight">

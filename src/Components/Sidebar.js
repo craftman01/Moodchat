@@ -27,11 +27,12 @@ function Sidebar(props) {
   // groups.forEach(group=>{
     // console.log(props)
   // })
+  
   let groups =[]
   console.log(props)
   props.groups.forEach(group=>{
     let messages = group[1].messages;
-     groups.push(<SidebarChat name={group[0]} lastChat={messages[messages.length-1].msg}/>)
+     groups.push(<SidebarChat key={group[0]} name={group[0]} lastChat={messages[messages.length-1].msg} handleGroupChange={props.handleGroupChange}/>)
   })
 
   const avaButton = {

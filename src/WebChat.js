@@ -38,8 +38,9 @@ export default class WebChat extends Component {
     super(props)
     this.state = {
       groups: [],
-      groupName: 'Vaazha'
+      groupName: ''
     }
+    this.handleGroupChange = this.handleGroupChange.bind(this)
   }
   
   async componentDidMount() {
@@ -60,13 +61,20 @@ export default class WebChat extends Component {
     // console.log(this.state)
 
   }
+  handleGroupChange(name){
+    this.setState(
+      {groupName:name}
+    )
+    console.log(this.state)
+    this.render()
+  }
   render() {
 
     return <div>
       <div className='app_bg'></div>
       <div className="app">
         <div className='app_body'>
-          <Sidebar groups={this.state.groups} />
+          <Sidebar groups={this.state.groups} handleGroupChange={this.handleGroupChange}/>
           <Chat groupName={this.state.groupName} />
         </div>
         <Bot />
