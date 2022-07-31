@@ -15,12 +15,11 @@ import { getAuth } from 'firebase/auth';
 class Chat extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
+    // console.log(props)
     let groupName = props.groupName
-    if (groupName === '')
-    groupName= 'Welcome'
+    if (groupName === '') { groupName = 'Welcome' }
     this.state = {
-      msgs: ['asdf'],
+      msgs: [''],
       input: '',
       groupName: groupName,
       unsub: null
@@ -30,32 +29,37 @@ class Chat extends React.Component {
 
   }
   componentDidUpdate(prevProps, prevState) {
+    // console.log("[-]","Prop",this.props, prevProps, "State",this.state, prevState)
     if (prevProps.groupName !== this.props.groupName) {
-      console.log('[-]')
-      if (this.state.unsub != null){
+
+      if (this.state.unsub != null) {
         this.state.unsub()
       }
       this.setState(
-        { groupName: this.props.groupName ,
-          unsub: this.listenForChanges()
-        
+        {
+          groupName: this.props.groupName,
+          unsub: this.listenForChanges(),
         }
       )
-      console.log(this.state)
+      // console.log(this.state)
       this.render()
       // this.state.unsub()
       // this.listenForChanges()
     }
+    // console.log("[+]","Prop",this.props, prevProps, "State",this.state, prevState)
   }
+
   async componentDidMount() {
 
     const unsub = this.listenForChanges()
     this.setState({ unsub: unsub })
-
   }
   listenForChanges() {
-    return onSnapshot(
-      doc(db, "groups", this.state.groupName),
+    if(!this.props.groupName){
+      return null
+    }
+    return onSnapshot(      
+      doc(db, "groups", this.props.groupName),
       (doc) => {
         let roomData = doc.data();
         let messages = [];
@@ -143,6 +147,7 @@ class Chat extends React.Component {
     }
   }
 
+
   render() {
     return (
       <div className='chat'>
@@ -161,7 +166,7 @@ class Chat extends React.Component {
             <IconButton><MoreVertIcon /></IconButton>
           </div>
         </div>
-        <div className='chat_body'>
+        <div className='chat_body' id='chat_body'>
           {this.state.msgs}
         </div>
         <div className='chat_footer'>
