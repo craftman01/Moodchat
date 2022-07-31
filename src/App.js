@@ -19,7 +19,7 @@ class App extends React.Component {
   componentDidMount() {
 
     onAuthStateChanged(auth, (user) => {
-      console.log("Auth Change")
+      // console.log("Auth Change")
       if (user) {
         this.setState({isLoggedIn:true})
       }

@@ -49,11 +49,12 @@ class Chat extends React.Component {
 
     const unsub = this.listenForChanges()
     this.setState({ unsub: unsub })
-
   }
   listenForChanges() {
-
-    return onSnapshot(
+    if(!this.props.groupName){
+      return null
+    }
+    return onSnapshot(      
       doc(db, "groups", this.props.groupName),
       (doc) => {
         let roomData = doc.data();

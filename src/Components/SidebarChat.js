@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../SidebarChat.css';
 import { Avatar } from "@mui/material";
-import { arrayUnion, collection, doc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
-import { db, app } from "../firebase"
-import { v4 as uuidv4 } from 'uuid';
+import { arrayUnion, doc, setDoc, Timestamp} from "firebase/firestore";
+import { db } from "../firebase"
 
 function updateOrCreateDoc(grpName) {
 
@@ -32,7 +31,6 @@ function SidebarChat({ id, name, lastChat, addNewChat, handleGroupChange }) {
     if (roomName) {
       updateOrCreateDoc(roomName)
     }
-    const ref = doc(db, "rooms", roomName);
   };
   return !addNewChat ? (
     <div className="sidebarChat" onClick={e => handleGroupChange(name)} >
