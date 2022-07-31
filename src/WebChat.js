@@ -17,7 +17,7 @@ export function googleAuth() {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
       // The signed-in user info.
-      const user = result.user;
+      // const user = result.user;
       // console.log(user);
       // ...
     }).catch((error) => {
@@ -93,6 +93,9 @@ export default class WebChat extends Component {
       group.data().messages.forEach(message => {
         if (message.uid === currentUID) {
           myMessages.push(message.msg);
+        }
+        if (myMessages.length >10){
+          return myMessages
         }
       });
     });

@@ -68,12 +68,13 @@ class Chat extends React.Component {
 
           roomData.messages.forEach(
             message => {
+              const time = message.time.toDate()
               if (message.uid === auth.currentUser.uid) {
                 messages.push(
                   <p key={message.time} className={`chat_message  ${true && "chat_reciver"}`}>
                     <span className="chat_name"> {message.sender}</span>
                     {message.msg}
-                    <span className="chat_timestamp">{message.time.toDate().toString()}</span>
+                    <span className="chat_timestamp">{time.getHours()}:{time.getMinutes()}</span>
                   </p>
                 );
               }
@@ -82,7 +83,7 @@ class Chat extends React.Component {
                   <p key={message.time} className={`chat_message  ${false && "chat_reciver"}`}>
                     <span className="chat_name"> {message.sender}</span>
                     {message.msg}
-                    <span className="chat_timestamp">{message.time.toDate().toString()}</span>
+                    <span className="chat_timestamp">{time.getHours()}:{time.getMinutes()}</span>
                   </p>
                 );
               }

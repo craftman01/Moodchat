@@ -36,7 +36,7 @@ class Sidebar extends React.Component {
       color: 'palevioletred',
       height: '7vh',
       backgroundColor: 'transparent',
-      borderRadius: '80%'
+      border:'none'
     }
   }
 
