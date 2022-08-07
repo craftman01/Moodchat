@@ -46,7 +46,7 @@ export default class WebChat extends Component {
 
   }
   async componentDidMount() {
-    
+
     let groupName = []
     const groups = await getDocs(collection(db, "groups"))
     groups.forEach(group => {
@@ -69,6 +69,7 @@ export default class WebChat extends Component {
         "messages": myMessages
       })
       .then(response => {
+        console.log(response.data)
         this.getMusicfromEmotion(response.data.emotion);
       })
   }
@@ -90,14 +91,12 @@ export default class WebChat extends Component {
     const groups = await getDocs(collection(db, "groups"));
     let myMessages = [];
     groups.forEach(group => {
-      group.data().messages.forEach(message => {
-        if (message.uid === currentUID) {
-          myMessages.push(message.msg);
+      const messages = group.data().messages
+      for (let i = messages.length - 1; (i > messages.length - 5) && (i > 2); i = i - 1) {
+        if (messages[i].uid === currentUID) {
+          myMessages.push(messages[i].msg);
         }
-        if (myMessages.length >10){
-          return myMessages
-        }
-      });
+      }
     });
     return myMessages;
   }

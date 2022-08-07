@@ -1,9 +1,24 @@
 {
     "music":{
-        "happy":[
+        "Happy":[
             "https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC",
             "https://open.spotify.com/playlist/37i9dQZF1DX0UrRvztWcAU",
             "https://open.spotify.com/playlist/37i9dQZF1DWZKuerrwoAGz"
+        ],
+        "Angry":[
+            "https://open.spotify.com/playlist/0KPEhXA3O9jHFtpd1Ix5OB"
+        ],
+        "Fear":[
+            "https://open.spotify.com/album/4cMjrlhfv3MJ9ZtdmV4Oun"
+        ],
+        "Sad":[
+            "https://open.spotify.com/playlist/37i9dQZF1DX7qK8ma5wgG1"
+        ],
+        "Surprise":[
+            "https://open.spotify.com/playlist/37i9dQZF1DX0XUsuxWHRQd"
         ]
+
+
     }
+
 }
