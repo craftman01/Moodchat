@@ -54,7 +54,8 @@ export default class WebChat extends Component {
     })
     this.setState({
       groups: groupName,
-      groupName: groupName[0][0]
+      groupName: groupName[0][0],
+      playlistURL:''
     })
   }
   handleGroupChange(name) {
@@ -78,7 +79,9 @@ export default class WebChat extends Component {
       const musics = recommendations.music[emotion];
       // console.log(musics)
       // opens a random playlist from list of recommandations for the emotion
-      window.open(musics[Math.floor(Math.random() * musics.length)]);
+      const playlistURL = musics[Math.floor(Math.random() * musics.length)]
+      window.open(playlistURL);
+      this.state.playlistURL = playlistURL
     }
     catch (error) {
       console.log("Bad emotion")
