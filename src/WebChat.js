@@ -69,7 +69,7 @@ export default class WebChat extends Component {
         "messages": myMessages
       })
       .then(response => {
-        console.log(response.data)
+        alert(JSON.stringify(response.data))
         this.getMusicfromEmotion(response.data.emotion);
       })
   }
